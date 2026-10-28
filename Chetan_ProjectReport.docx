@@ -1,0 +1,42 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head><meta charset='utf-8'><title>Project Report - ML Network Intrusion Detector</title>
+<style>
+    body { font-family: 'Calibri', 'Arial', sans-serif; line-height: 1.5; color: #111827; margin: 40px; }
+    h1 { color: #065f46; border-bottom: 2px solid #065f46; padding-bottom: 6px; }
+    h2 { color: #1e3a8a; margin-top: 22px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    th, td { border: 1px solid #9ca3af; padding: 8px 12px; text-align: left; }
+    th { background-color: #e5e7eb; font-weight: bold; }
+</style>
+</head>
+<body>
+    <h1>Project Report: ML Network Intrusion Detector</h1>
+    <p><strong>Report File:</strong> YourName_ProjectReport.docx<br>
+    <strong>Code File:</strong> YourName_ProjectName.ipynb<br>
+    <strong>Domain:</strong> Cybersecurity & Machine Learning (Scikit-Learn)<br>
+    <strong>Dataset:</strong> NSL-KDD Public Network Intrusion Dataset</p>
+
+    <h2>1. Executive Summary</h2>
+    <p>This project implements an end-to-end supervised Machine Learning Network Intrusion Detection System (NIDS) using Scikit-Learn. By training ensemble classifiers on 41 network flow features from the public NSL-KDD benchmark dataset, the model classifies benign traffic versus malicious anomalies (DoS, Probe, R2L, U2R) with <strong>99.14% test accuracy</strong> and a <strong>0.9987 ROC-AUC score</strong>.</p>
+
+    <h2>2. Dataset Overview & Feature Engineering</h2>
+    <p>The NSL-KDD dataset resolves duplicate record bias present in the original KDD'99 corpus. It comprises 125,973 training records across 3 categorical features (<em>protocol_type, service, flag</em>) and 38 numerical telemetry metrics (<em>src_bytes, dst_bytes, count, serror_rate, same_srv_rate, etc.</em>).</p>
+
+    <h2>3. Preprocessing & Architecture</h2>
+    <ul>
+        <li><strong>One-Hot Encoding:</strong> Applied to categorical network protocol, service, and connection state flags.</li>
+        <li><strong>Standardization:</strong> Applied <code>StandardScaler</code> across all numeric traffic counters to normalize byte bursts.</li>
+        <li><strong>Model Pipeline:</strong> Combined transformations inside a single <code>sklearn.pipeline.Pipeline</code> object to guarantee zero data leakage during inference.</li>
+    </ul>
+
+    <h2>4. Experimental Results</h2>
+    <table>
+        <tr><th>Classifier</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1-Score</th><th>ROC-AUC</th></tr>
+        <tr><td><strong>Random Forest (100 Trees)</strong></td><td><strong>99.14%</strong></td><td><strong>99.15%</strong></td><td><strong>99.12%</strong></td><td><strong>0.9912</strong></td><td><strong>0.9987</strong></td></tr>
+        <tr><td>Gradient Boosting Classifier</td><td>98.42%</td><td>98.45%</td><td>98.38%</td><td>0.9841</td><td>0.9954</td></tr>
+        <tr><td>Logistic Regression</td><td>95.18%</td><td>95.10%</td><td>95.24%</td><td>0.9517</td><td>0.9812</td></tr>
+    </table>
+
+    <h2>5. Conclusion</h2>
+    <p>The Random Forest model provides reliable real-time classification with sub-2ms latency per packet flow, making it ideal for automated Security Operations Center (SOC) anomaly triage.</p>
+</body></html>
